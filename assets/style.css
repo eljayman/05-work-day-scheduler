@@ -11,10 +11,9 @@ textarea {
   color: #000000;
   border-left: 1px solid black;
   padding: 10px;
-  text-align: left;
   min-width: 60%;
 }
-div {
+span {
   width: 100%;
   margin: 1px 20px 1px;
 }
@@ -30,9 +29,9 @@ div {
 }
 
 .time-block {
-  text-align: center;
+  text-align: left;
   border-radius: 15px;
-  width: fit-content;
+  font-size: 16px;
 }
 .container {
   width: 100%;
@@ -57,17 +56,17 @@ div {
 
 .past {
   background-color: #d3d3d3;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .present {
   background-color: #ff6961;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .future {
   background-color: #77dd77;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .saveBtn {
