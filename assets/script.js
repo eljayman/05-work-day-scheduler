@@ -4,6 +4,7 @@ function currentTime() {
   let dayJsObject = dayjs();
   const currentDay = document.getElementById("currentDay");
   currentDay.innerText = dayJsObject.format("M/D/YYYY h:mm:ss A");
+  tenseColor();
 }
 // Start timer when the page is loaded
 $(document).ready(currentTime());
@@ -20,23 +21,22 @@ var workingHours = [
   "4 PM",
   "5 PM",
 ];
-var $rowEl = $("div");
-var $rowHourEl = "";
-var $userFieldEl = "";
-var $saveBtn = "";
 function createHour() {
+  const $rowEl = $("div");
   for (var i = 0; i < workingHours.length; i++) {
     $rowEl.append(
-      `<span class='row'><time>${workingHours[i]}</time><textarea id=${workingHours[i]} ></textarea><button>Save</button></span>`
+      `<span class='row'><time>${workingHours[i]}</time><textarea type="input"/><button>Save</button></span>`
     );
-    let $rowHourEl = $("time").addClass("hour");
-    let $userFieldEl = $("textarea").addClass("time-block");
-    let $saveBtn = $("button").addClass("saveBtn");
-    tenseColor();
+    $("time").addClass("hour");
+    $("textarea").addClass("time-block");
+    $("button").addClass("saveBtn");
   }
+  setInnerText();
+  tenseColor();
 }
+// run at start
 $(document).ready(createHour());
-
+//function that colors the input field
 function tenseColor() {
   $("textarea").each(function (index) {
     if (index + 9 == dayJsObject.format("H")) {
@@ -48,7 +48,17 @@ function tenseColor() {
     }
   });
 }
-
-// create a function that will check the hour and
-// highlight the fields with color depending on past, future, or present tense.
-// run this function every second so keep the color scheme current
+// function that uses the local storage to set the text of the user fields
+function setInnerText() {
+  $("textarea").each(function (index) {
+    $(this).append(localStorage.getItem(index));
+  });
+}
+//function that saves the fields when a save button is clicked
+var $divButtonEl = $("button");
+$divButtonEl.on("click", function (index) {
+  $("textarea").each(function (index) {
+    const userText = $(this)[0].value;
+    localStorage.setItem(index, userText);
+  });
+});
